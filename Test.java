@@ -1,3 +1,8 @@
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.*;
+
 public class Test {
         public static void main(String[] args) {
             System.out.println("Hello");
@@ -11,9 +16,6 @@ public class Test {
             family.addRelative(nick);
             family.addRelative(mama);
             family.addRelative(papa);
-//        family.showAllRelatives();
-//        mama.showKids();
-//        papa.showKids();
             Human sister = new Human("Анна Баркан", 29, Gender.female, mama, papa);
             family.addRelative(sister);
             family.updateKids();
@@ -22,6 +24,14 @@ public class Test {
             System.out.println();
             nick.findSiblings();
             System.out.println();
+
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("family.out"));
+            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("family.out"));
+
+            Serialization serialization = new Serialization(objectOutputStream, objectInputStream, new FamilyTree());
+            serialization.save(family);
+            serialization.readFile();
+            serialization.newFamily.showAllRelatives();
         }
     }
 

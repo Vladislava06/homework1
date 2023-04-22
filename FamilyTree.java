@@ -1,14 +1,21 @@
 import java.util.ArrayList;
 import java.util.List;
-    public class FamilyTree {
+import java.io.Serializable;
+    public class FamilyTree implements Serializable {
         private List<Human> people;
 
         FamilyTree() {
             this.people = new ArrayList<>();
         }
 
-        public void addRelative(Human human) {
+        public void addHuman(Human human) {
             people.add(human);
+            if (human.getMother() != null) {
+                human.getMother().addKid(human);
+            }
+            if (human.getFather() != null) {
+                human.getFather().addKid(human);
+            }
         }
 
         public void showAllRelatives() {
@@ -26,17 +33,6 @@ import java.util.List;
             }
 
             return null;
-        }
-
-        public void updateKids() {
-            for (Human human: people) {
-                if (human.getMother() != null) {
-                    human.getMother().addKid(human);
-                }
-                if (human.getFather() != null) {
-                    human.getFather().addKid(human);
-                }
-            }
         }
     }
 
