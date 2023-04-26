@@ -1,8 +1,8 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-public class Human implements Serializable {
+import java.util.Objects;
+public class Human implements Serializable, Comparable<Human> {
     private String fullName;
     private int age;
     private Gender gender;
@@ -103,22 +103,28 @@ public class Human implements Serializable {
 
     public void findSiblings() {
         Human mama = this.getMother();
-        Human papa = this.getFather();
-        if (mama != null) {
-            for (Human kid : mama.kids) {
-                if (!kid.equals(this)) {
-                    System.out.println(kid);
-                }
-            }
-        } else {
-                for (Human kid : papa.kids) {
-                    if (!kid.equals(this)) {
-                        System.out.println(kid);
-                    }
-                }
+    }
+
+    Human papa = this.getFather();
+        if(mama !=null)
+
+    {
+        for (Human kid : mama.kids) {
+            if (!kid.equals(this)) {
+                System.out.println(kid);
             }
         }
-
+    }else{
+        for (Human kid : papa.kids) {
+            if (!kid.equals(this)) {
+                System.out.println(kid);
+            }
+        }
     }
 
 
+    @Override
+    public int compareTo(Human o) {
+        return fullName.compareTo(o.fullName);
+    }
+}
