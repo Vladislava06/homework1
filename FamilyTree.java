@@ -10,12 +10,12 @@ public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Itera
 
     public void addHuman(E human) {
         people.add(human);
-//        if (human.getMother() != null) {
-//            human.getMother().addKid(human);
-//        }
-//        if (human.getFather() != null) {
-//            human.getFather().addKid(human);
-//        }
+        if (human.getMother() != null) {
+            human.getMother().addKid(human);
+        }
+        if (human.getFather() != null) {
+            human.getFather().addKid(human);
+       }
     }
 
     public String showAllRelatives() {
