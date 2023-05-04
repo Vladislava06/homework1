@@ -2,7 +2,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-public class Human implements Serializable, Comparable<Human> {
+
+public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
     private String fullName;
     private int age;
     private Gender gender;
@@ -77,7 +78,7 @@ public class Human implements Serializable, Comparable<Human> {
     }
 
     public void showKids() {
-        for (Human kid : kids) {
+        for (Human kid: kids) {
             System.out.println(kid);
         }
     }
@@ -103,25 +104,21 @@ public class Human implements Serializable, Comparable<Human> {
 
     public void findSiblings() {
         Human mama = this.getMother();
-    }
-
-    Human papa = this.getFather();
-        if(mama !=null)
-
-    {
-        for (Human kid : mama.kids) {
-            if (!kid.equals(this)) {
-                System.out.println(kid);
+        Human papa = this.getFather();
+        if (mama != null) {
+            for (Human kid: mama.kids) {
+                if (!kid.equals(this)) {
+                    System.out.println(kid);
+                }
             }
-        }
-    }else{
-        for (Human kid : papa.kids) {
-            if (!kid.equals(this)) {
-                System.out.println(kid);
+        } else {
+            for (Human kid: papa.kids) {
+                if (!kid.equals(this)) {
+                    System.out.println(kid);
+                }
             }
         }
     }
-
 
     @Override
     public int compareTo(Human o) {
